@@ -8,7 +8,8 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-7.phar" \
     && apt-get install -y libtidy-dev \
     && apt-get install -y libcurl4-openssl-dev \
     && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    && apt-get install -y libxml2-dev libxslt-dev
+    && apt-get install -y libxml2-dev libxslt-dev \
+    && apt-get install -y mysql-client
 RUN docker-php-ext-configure curl \
     && docker-php-ext-configure mysqli \
     && docker-php-ext-configure pdo \
