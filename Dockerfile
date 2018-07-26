@@ -29,7 +29,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-7.phar" \
     && (curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -) \
     && apt-get install -y nodejs \
     && npm install -g less \
-    && npm install -g less-plugin-clean-css \
+    && npm install -g less-plugin-clean-css
 
 ADD php.ini /usr/local/etc/php/php.ini
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
