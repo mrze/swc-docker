@@ -5,14 +5,12 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-7.phar" \
     && apt-get update \
     && apt-get install -y sudo \
     && apt-get install -y git \
+    && apt-get install -y gnupg \
     && apt-get install -y libtidy-dev \
     && apt-get install -y libcurl4-openssl-dev \
     && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && apt-get install -y libxml2-dev libxslt-dev \
     && apt-get install -y mysql-client \
-    && apt-get install -y nodejs \
-    && npm install -g less \
-    && npm install -g less-plugin-clean-css \
     && docker-php-ext-configure curl \
     && docker-php-ext-configure mysqli \
     && docker-php-ext-configure pdo \
@@ -27,7 +25,11 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-7.phar" \
     && mkdir -p /tmp/feeds/ \
     && chown www-data /tmp/feeds/ \
     && touch /tmp/feeds/gns_flashnews.xml \
-    && chown www-data /tmp/feeds/gns_flashnews.xml
+    && chown www-data /tmp/feeds/gns_flashnews.xml \
+    && (curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -) \
+    && apt-get install -y nodejs \
+    && npm install -g less \
+    && npm install -g less-plugin-clean-css \
 
 ADD php.ini /usr/local/etc/php/php.ini
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
