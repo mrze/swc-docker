@@ -10,7 +10,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && apt-get install -y libcurl4-openssl-dev \
     && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && apt-get install -y libxml2-dev libxslt-dev \
-    && apt-get install -y mysql-client \
+    && apt-get install -y mariadb-client \
     && docker-php-ext-configure curl \
     && docker-php-ext-configure mysqli \
     && docker-php-ext-configure pdo \
@@ -26,7 +26,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && chown www-data /tmp/feeds/ \
     && touch /tmp/feeds/gns_flashnews.xml \
     && chown www-data /tmp/feeds/gns_flashnews.xml \
-    && (curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -) \
+    && (curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -) \
     && apt-get install -y nodejs \
     && npm install -g less \
     && npm install -g less-plugin-clean-css \
