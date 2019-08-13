@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.4-rc-apache
 
 RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && chmod +x /usr/bin/phpunit \
