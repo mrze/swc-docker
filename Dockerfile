@@ -18,7 +18,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && docker-php-ext-configure xsl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure tidy \
-    && docker-php-ext-install curl mysqli pdo soap xsl gd tidy \
+    && docker-php-ext-install curl mysqli pdo soap xsl gd tidy opcache \
     && mkdir -p /swcombine/htdocs/code/ \
     && mkdir -p /swcombine/htdocs/images.swcombine.com/ \
     && mkdir -p /tmp/feeds/ \
@@ -36,5 +36,6 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
 
 ADD php.ini /usr/local/etc/php/php.ini
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
+ADD opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 WORKDIR /swcombine/htdocs/code/
 
