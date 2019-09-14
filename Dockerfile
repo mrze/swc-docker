@@ -32,6 +32,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && npm install -g db-migrate \
     && npm install -g db-migrate-mysql \
     && a2enmod rewrite \
+    && a2enmod remoteip \
     && a2disconf javascript-common
 
 ADD php.ini /usr/local/etc/php/php.ini
