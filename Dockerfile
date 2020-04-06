@@ -19,6 +19,8 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure tidy \
     && docker-php-ext-install curl mysqli pdo soap xsl gd tidy opcache \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
     && mkdir -p /swcombine/htdocs/code/ \
     && mkdir -p /swcombine/htdocs/images.swcombine.com/ \
     && mkdir -p /tmp/feeds/ \
