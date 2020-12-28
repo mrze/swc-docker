@@ -1,6 +1,6 @@
 FROM php:8-apache
 
-RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-9.5.phar" \
+RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.5.phar" \
     && chmod +x /usr/bin/phpunit \
     && apt-get update \
     && apt-get install -y sudo zip unzip \
@@ -18,7 +18,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-9.5.phar" \
     && docker-php-ext-configure xsl \
     && docker-php-ext-configure gd \
     && docker-php-ext-configure tidy \
-    && docker-php-ext-install curl mysqli pdo soap xsl gd tidy opcache \
+    && docker-php-ext-install curl mysqli pdo soap xsl gd tidy \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && mkdir -p /swcombine/htdocs/code/ \
@@ -38,6 +38,5 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-9.5.phar" \
 
 ADD php.ini /usr/local/etc/php/php.ini
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
-ADD opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 WORKDIR /swcombine/htdocs/code/
 
