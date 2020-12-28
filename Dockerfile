@@ -1,6 +1,6 @@
-FROM php:7.3-apache
+FROM php:8-apache
 
-RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
+RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-9.5.phar" \
     && chmod +x /usr/bin/phpunit \
     && apt-get update \
     && apt-get install -y sudo zip unzip \
