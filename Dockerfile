@@ -38,5 +38,6 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.5.phar" \
 
 ADD php.ini /usr/local/etc/php/php.ini
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /swcombine/htdocs/code/
 
