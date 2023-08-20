@@ -1,6 +1,6 @@
 FROM php:7.3-apache
 
-RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
+RUN curl -s -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && chmod +x /usr/bin/phpunit \
     && apt-get update \
     && apt-get install -y sudo zip unzip \
@@ -19,7 +19,7 @@ RUN curl  -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure tidy \
     && docker-php-ext-install curl mysqli pdo soap xsl gd tidy opcache \
-    && pecl install xdebug \
+    && pecl install xdebug-3.1.5 \
     && docker-php-ext-enable xdebug \
     && mkdir -p /swcombine/htdocs/code/ \
     && mkdir -p /swcombine/htdocs/images.swcombine.com/ \
