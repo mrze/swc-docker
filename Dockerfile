@@ -2,15 +2,12 @@ FROM php:7.3-apache
 
 RUN curl -s -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && chmod +x /usr/bin/phpunit \
+    && mkdir -p /etc/apt/keyrings \
     && apt-get update \
-    && apt-get install -y sudo zip unzip \
-    && apt-get install -y git \
-    && apt-get install -y gnupg \
-    && apt-get install -y libtidy-dev \
-    && apt-get install -y libcurl4-openssl-dev \
-    && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    && apt-get install -y libxml2-dev libxslt-dev \
-    && apt-get install -y mariadb-client \
+    && apt-get install -y sudo ca-certificates zip unzip git curl gnupg libtidy-dev libcurl4-openssl-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxml2-dev libxslt-dev mariadb-client \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update \
     && docker-php-ext-configure curl \
     && docker-php-ext-configure mysqli \
     && docker-php-ext-configure pdo \
@@ -27,14 +24,15 @@ RUN curl -s -o /usr/bin/phpunit -L "https://phar.phpunit.de/phpunit-8.1.phar" \
     && chown www-data /tmp/feeds/ \
     && touch /tmp/feeds/gns_flashnews.xml \
     && chown www-data /tmp/feeds/gns_flashnews.xml \
-    && (curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -) \
     && apt-get install -y nodejs \
     && npm install -g less \
     && npm install -g less-plugin-clean-css \
     && npm install -g db-migrate \
     && npm install -g db-migrate-mysql \
     && a2enmod rewrite \
-    && a2enmod remoteip
+    && a2enmod remoteip \
+    && git config --system --add safe.directory "*" \
+    && mkdir -p /swcombine/htdocs/logs/
 
 ADD php.ini /usr/local/etc/php/php.ini
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
